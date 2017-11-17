@@ -10,6 +10,8 @@ public class Principal {
 	public static void main(String[] args) {
 		//Instanciar o BD
 		BD bd = new BD();
+		//Carregar os clintes do arquivo
+		bd.carregarClientes();
 		//Instanciar controleExibirClientes
 		ControleExibirCliente cec = new ControleExibirCliente(bd);
 		//Instanciar ControleCadastraCliente

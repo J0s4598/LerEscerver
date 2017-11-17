@@ -9,13 +9,22 @@ public class BD {
 	//Atributos
 	private ArrayList<Cliente> clientes;
 	private String fileName = "clientes.txt";
+	private DocumentWriter dw;
+	private DocumentReader dr;
 	
 	//metodo construtor
 	public BD(){
 		//Instanciar o ArrayList
 		this.clientes = new ArrayList<Cliente>();
 		//Instanciar o DocumentReader
-		DocumentReader dr = new DocumentReader();
+		this.dr = new DocumentReader();
+		//Instanciar o DocumentoWrite
+		this.dw = new DocumentWriter();
+	}
+	
+	/*metodo que carrega todos os clintes do arquivo
+	  para ArrayList*/	
+	public void carregarClientes(){
 		//Ler as linhas do aquivo
 		ArrayList<String> linhas = dr.read(fileName);
 		//Percorrer o ArrayList criando os clientes
@@ -33,19 +42,26 @@ public class BD {
 	public void gravarCliente(Cliente c){
 		//colocar o cliente no ArrayList
 		this.clientes.add(c);
-		//transformar cliente em string
-		String cliente = c.getNome() + ";" + c.getCPF() + ";" + c.getIdade();
-		//Instanciar o DocumentWriter
-		DocumentWriter dw = new DocumentWriter();
 		//Gravaro cliente no arquivo
-		dw.write(this.fileName, cliente);
+		dw.write(this.fileName, c.toLinha());
 	}
 
 	public ArrayList<Cliente> getClientes() {
 		return clientes;
 	}
 	
-	
+	//Metodo que verifice se ja existe cliente com o CPF informado
+	public boolean existeCliente(String CPF){
+		boolean retorno = false;
+		//percore o Arraylist
+		for (int i = 0; i < this.clientes.size(); i++) {
+			//Verificar se existe cliente com o mesmo CPF
+			if (this.clientes.get(i).getCPF().equals(CPF)) {
+				retorno = true;
+			}
+		}
+		return retorno;
+	}
 	
 	
 	

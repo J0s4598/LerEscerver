@@ -47,10 +47,14 @@ public class Cliente {
 
 	@Override
 	public String toString() {
-		return "Cliente [nome=" + nome + ", CPF=" + CPF + ", idade=" + idade + "]";
+		return "Cliente [nome: " + nome + ", CPF: " + CPF + ", idade: " + idade + "]";
 	}
 	
-	
+	/*Metodo que transforma um cliente na representaçao dele em linha
+	  para salvar em um arquivo*/
+	public String toLinha(){
+		return getNome() + ";" + getCPF() + ";" + getIdade();
+	}
 	
 
 }
